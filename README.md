@@ -1,0 +1,2 @@
+Shopify Image Optimizer
+==========
