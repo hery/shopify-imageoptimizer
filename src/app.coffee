@@ -7,7 +7,7 @@ class ImageOptimizer extends Batman.App
 class ImageOptimizer.ImagesController extends Batman.Controller
   routingKey:'images'
   index: ->
-    @set 'test','test'
+    # @set 'test','HEY!'
 
 # Define model
 class ImageOptimizer.Image extends Batman.Model

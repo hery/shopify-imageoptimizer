@@ -5,14 +5,20 @@
     <script src="lib/dist/batman.js"></script>
     <script src="lib/es5-shim.js"></script>
     <script src="lib/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="stylesheets/base.css">
   </head>
   <body>
   <div data-yield="main"></div>
   <div data-defineview="images/index">
-    <h1>Image Optimizer</h1>
+    <div class="header">
+      <a class="logo" href="#">Shopify Image Optimizer</a>
+    </div>
     <ul>
-      <li>
-        <p data-bind="test">Prout</p>
+      <li>Test key: 
+        {{ test_key }}
+        <!-- fetch all images from shopify and populate here 
+        <a href="#"><img src=""></a> -->
+        
       </li>
     </ul>
   </div>

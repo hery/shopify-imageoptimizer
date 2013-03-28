@@ -30,9 +30,7 @@
 
     ImagesController.prototype.routingKey = 'images';
 
-    ImagesController.prototype.index = function() {
-      return this.set('test', 'test');
-    };
+    ImagesController.prototype.index = function() {};
 
     return ImagesController;
 
