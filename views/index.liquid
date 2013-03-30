@@ -22,27 +22,35 @@
           <p>{{ product.title }}</p>
           {% for image in product.images %}
             <img src={{ image.src }} height="200px" />
-            <p>1) Is your image name descriptive? {{ image.src }}</p>
+            <p>1) Is your image name descriptive? <strong class="filename">{{ image.src }}</strong></p>
             <p>2) Is your alt tag descriptive enough? {{ product.title }}</p>
-            <p>3) Is your image file type JPEG? <div id="filename">{{ image.src }}</div></p>
+            <p>3) Is your image file type JPEG? <strong class="extension">{{ image.src }}</strong></p>
 
           {% endfor %}
           </li>
-          <hr>
-        {% endfor %}
-      </ul>
+            <hr>
+          {% endfor %}
+        </ul>
 
-    {% else %}
+      {% else %}
 
-      <ul>
-        <li><a href='/'>Sign in with Shopify</a></li>
-      </ul>
+        <ul>
+          <li><a href='/'>Sign in with Shopify</a></li>
+        </ul>
 
-    {% endif%}
-  </div>
-  <script type="text/javascript">
-$("#filename").html("ext");
-  </script>
-  </body>
-</html>
-  
+      {% endif%}
+    </div>
+    <script type="text/javascript">
+$(".extension").each(function()  {
+  var url = $(this).html();
+  var pattern  = /.+\.([^?]+)(\?|$)/
+  extension = url.match(pattern)[1];
+  $(this).html(extension);
+
+});
+
+
+    </script>
+    </body>
+  </html>
+    
