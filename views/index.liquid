@@ -2,21 +2,47 @@
 <html lang="en">
   <head>
     <title>Shopify Image Optimizer</title>
-    <script src="lib/dist/batman.js"></script>
-    <script src="lib/es5-shim.js"></script>
-    <script src="lib/app.js"></script>
-    <link rel="stylesheet" type="text/css" href="stylesheets/base.css">
+    <script src="/lib/dist/batman.js"></script>
+    <script src="/lib/es5-shim.js"></script>
+    <script src="/lib/app.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
   </head>
   <body>
   <div data-yield="main"></div>
   <div data-defineview="images/index">
-    <div class="header">
-      <a class="logo" href="#">Shopify Image Optimizer</a>
-    </div>
-      <ul>
-      <li><a href='/auth/shopify'>Sign in with Shopify</a></li>
-      </ul>
+  <div class="header">
+    <a class="logo" href="#">Shopify Image Optimizer</a>
   </div>
+    {% if products %}
+
+      <ul>
+        {% for product in products %}
+            <li>
+          <p>{{ product.title }}</p>
+          {% for image in product.images %}
+            <img src={{ image.src }} height="200px" />
+            <p>1) Is your image name descriptive? {{ image.src }}</p>
+            <p>2) Is your alt tag descriptive enough? {{ product.title }}</p>
+            <p>3) Is your image file type JPEG? <div id="filename">{{ image.src }}</div></p>
+
+          {% endfor %}
+          </li>
+          <hr>
+        {% endfor %}
+      </ul>
+
+    {% else %}
+
+      <ul>
+        <li><a href='/'>Sign in with Shopify</a></li>
+      </ul>
+
+    {% endif%}
+  </div>
+  <script type="text/javascript">
+$("#filename").html("ext");
+  </script>
   </body>
 </html>
   
