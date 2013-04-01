@@ -17,6 +17,7 @@ configure do
   set :shop_name, ''
   set :client_id, ENV['SHOPIFY_KEY']
   set :client_secret, ENV['SHOPIFY_SECRET']
+  set :permanent_token, ''
 end
 
 get '/' do
@@ -46,14 +47,27 @@ get '/callback' do
                                   'code' => code })
 
   permanent_token_json_res = JSON.parse(permanent_token_request.body)                     
-  permanent_token = permanent_token_json_res["access_token"]
+  set :permanent_token, permanent_token_json_res["access_token"]
 
   # Use permanent token to get products list
   product_request = HTTParty.get("https://#{settings.shop_name}.myshopify.com/admin/"\
                                   "products.json",
-                                 :headers => { "X-Shopify-Access-Token" => permanent_token }
+                                 :headers => { "X-Shopify-Access-Token" => settings.permanent_token }
                                 )
   product_json = JSON.parse(product_request.body)
   products = product_json["products"] # array of products
   liquid :index, :locals => { :products => products }
+end
+
+post '/updateProduct' do
+  new_alt = params['alt-tag']
+  product_id = params['product_id']
+  product_hash = { :product => { "title" => new_alt } }
+  product_json = product_hash.to_json
+  p product_json
+  update_req = HTTParty.put("https://#{settings.shop_name}.myshopify.com/"\
+               "admin/products/#{product_id}.json", 
+                  :body => product_hash,
+                  :headers => { "X-Shopify-Access-Token" => settings.permanent_token })
+  redirect "/"
 end

@@ -22,13 +22,14 @@
             <p><h3>{{ product.title }}</h3></p>
           {% for image in product.images %}
             <img src={{ image.src }} height="200px" />
-            <form action="/updateProduct" method="put">
-              <p>1) Is your image name descriptive enough?</p>
-              <input type="text" name="filename" class="filename" size="100" value="{{ image.src }}" />
-              <p>2) Is your alt tag descriptive enough?</p>
+            <form action="/updateProduct" method="post">
+              <input type="hidden" name="product_id" value="{{ product.id }}" />
+              <p>1) Make your image name descriptive</p>
+              <input type="text" name="filename" class="filename" size="100" value="{{ image.src }}" readonly/>
+              <p>2) Make your alt tag descriptive (it is also your image titlte)</p>
               <input type="text" name="alt-tag" class="alt-tag" size="100" value="{{ product.title }}" />
-              <p>3) Is your image file type JPEG?</p> 
-              <input type="text" name="extension" class="extension" size="100" value="{{ image.src }}" /><br />
+              <p>3) Convert your image to JPEG</p>
+              <input type="text" name="extension" class="extension" size="100" value="{{ image.src }}" readonly/><br />
               <p><input type="submit" /></p>
             </form>
 
