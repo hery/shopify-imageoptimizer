@@ -27,7 +27,7 @@ get '/' do
     # Initiate authentication
     redirect "https://#{settings.shop_name}.myshopify.com/admin/oauth/authorize?"\
              "client_id=#{settings.client_id}&"\
-             "scope=write_products&"
+             "scope=write_products"
              
   end
 end
