@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <title>Shopify Image Optimizer</title>
-    <!-- <script src="/lib/dist/batman.js"></script>
+    <script src="/lib/dist/batman.js"></script>
     <script src="/lib/es5-shim.js"></script>
-    <script src="/lib/app.js"></script> -->
+    <script src="/lib/app.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/stylesheets/base.css">
   </head>
-  <body onload="updateValues()">
+  <body>
   <div data-yield="main"></div>
   <div data-defineview="images/index">
   <div class="header">
@@ -22,15 +22,9 @@
             <p><h3>{{ product.title }}</h3></p>
           {% for image in product.images %}
             <img src={{ image.src }} height="200px" />
-            <form action="/updateProduct" method="put">
-              <p>1) Is your image name descriptive enough?</p>
-              <input type="text" name="filename" class="filename" size="100" value="{{ image.src }}" />
-              <p>2) Is your alt tag descriptive enough?</p>
-              <input type="text" name="alt-tag" class="alt-tag" size="100" value="{{ product.title }}" />
-              <p>3) Is your image file type JPEG?</p> 
-              <input type="text" name="extension" class="extension" size="100" value="{{ image.src }}" /><br />
-              <p><input type="submit" /></p>
-            </form>
+            <p>1) Is your image name descriptive enough? <strong class="filename">{{ image.src }}</strong></p>
+            <p>2) Is your alt tag descriptive enough? <strong class="tag">{{ product.title }}</strong></p>
+            <p>3) Is your image file type JPEG? <strong class="extension">{{ image.src }}</strong></p>
 
           {% endfor %}
           </li>
@@ -44,27 +38,25 @@
             What is your shop name? 
             <input type="text" name="shopName" />
             <input type="submit" />
-          </form>  
-        </li></ul>
+        </form>  
+      </li></ul>
 
       {% endif%}
     </div>
     <script type="text/javascript">
-    function updateValues() {
       $(".extension").each(function() {
-        var url = $(this).val();
+        var url = $(this).html();
         var pattern  = /.+\.([^?]+)(\?|$)/
         extension = url.match(pattern)[1];
-        $(this).val(extension);
+        $(this).html(extension);
       });
 
       $(".filename").each(function() {
-        var url = $(this).val();
+        var url = $(this).html();
         var pattern  = /([\w\d_-]*)\.?[^\\\/]*$/i
         filename = url.match(pattern)[1];
-        $(this).val(filename);
+        $(this).html(filename);
       });
-    }
     </script>
     </body>
   </html>

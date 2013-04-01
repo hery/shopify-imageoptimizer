@@ -22,3 +22,7 @@ a.logo:visited {
   text-decoration:none;
   color:white;
 }
+
+li{
+  list-style-type:none;
+}
