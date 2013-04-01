@@ -28,7 +28,6 @@ get '/' do
     redirect "https://#{settings.shop_name}.myshopify.com/admin/oauth/authorize?"\
              "client_id=#{settings.client_id}&"\
              "scope=write_products"
-             
   end
 end
 
@@ -60,6 +59,7 @@ get '/callback' do
 end
 
 post '/updateProduct' do
+  # Prepare JSON file and send PUT request to update product
   new_alt = params['alt-tag']
   product_id = params['product_id']
   product_hash = { :product => { "title" => new_alt } }
